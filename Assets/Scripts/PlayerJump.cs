@@ -16,12 +16,11 @@ public class PlayerJump : MonoBehaviour
     private float _jumpTime;
     [SerializeField]
     private float _fallFasterGravityFactor;
-    [SerializeField]
-    private float _earlyExitGravityFactor;
 
     private float _gravityScaleFactor;
     private float _jumpGravity;
     private float _initJumpSpeed;
+    private float _jumpTimer;
 
     private void Awake()
     {
@@ -32,11 +31,13 @@ public class PlayerJump : MonoBehaviour
         _gravityScaleFactor = _jumpGravity / Physics2D.gravity.y;
         _rb.gravityScale = _gravityScaleFactor;
         _initJumpSpeed = -_jumpGravity * _jumpTime;
+
+        _jumpTimer = _jumpTime;
     }
 
     public void Jump()
     {
-        if (_jumpInput.action.ReadValue<float>() > 0.5f && _groundCheck.isGrounded && _canJump)
+        if (Input.GetKeyDown(KeyCode.Space) && _groundCheck.isGrounded && _canJump) //changed to old input system
         {
             StartJump();
         }
@@ -45,7 +46,7 @@ public class PlayerJump : MonoBehaviour
             JumpUpdate();
         }
 
-        if (_jumpInput.action.ReadValue<float>() == 0.0f)
+        if (Input.GetKeyUp(KeyCode.Space)) //changed to old input system
         {
             _canJump = true;
         }
@@ -55,26 +56,28 @@ public class PlayerJump : MonoBehaviour
     {
         _canJump = false;
         _rb.AddForce(_rb.mass * Vector2.up * _initJumpSpeed, ForceMode2D.Impulse);
+        _player._movementState = Player.MovementState.Jump;
     }
 
     private void JumpUpdate()
     {
         if (_rb.velocity.y < 0)
         {
+            Debug.Log("fall faster");
             _rb.gravityScale = _gravityScaleFactor * _fallFasterGravityFactor;
-        }
-        else if (_rb.velocity.y > 0 && _jumpInput.action.ReadValue<float>() < 0.5f)
-        {
-            _rb.gravityScale = _gravityScaleFactor * _earlyExitGravityFactor;
         }
         else
         {
+            Debug.Log("nothing happening");
             _rb.gravityScale = _gravityScaleFactor;
         }
 
-        if (_groundCheck.isGrounded)
+        _jumpTimer -= Time.deltaTime;
+
+        if (_jumpTimer <= 0.0f)
         {
             _player._movementState = Player.MovementState.Move;
+            _jumpTimer = _jumpTime;
         }
     }
 

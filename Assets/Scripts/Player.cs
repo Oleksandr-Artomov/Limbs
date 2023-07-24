@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (_changeLimbState.action.ReadValue<float>() > 0.5f && buttonDown == false)
+        if (Input.GetKeyDown(KeyCode.RightShift) && buttonDown == false) //changed to old input system
         {
             if (_limbState == LimbState.NoLimb)
             {
@@ -51,13 +51,14 @@ public class Player : MonoBehaviour
             }
             buttonDown = true;
         }
-        else if (_changeLimbState.action.ReadValue<float>() == 0.0f)
+        else if (Input.GetKeyDown(KeyCode.RightShift)) //changed to old input system
         {
             buttonDown = false;
         }
 
-        _playerJump.Jump();
 
         _playerMovement.Move(_limbState);
+
+        _playerJump.Jump();
     }
 }

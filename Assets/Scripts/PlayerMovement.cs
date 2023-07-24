@@ -24,9 +24,6 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 zeroVector = Vector3.zero;
 
-    public Vector2 velocity;
-    public Vector2 lastVelocity;
-
 
     void Awake()
     {
@@ -37,9 +34,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(Player.LimbState state)
     {
-        velocity = _rb.velocity;
         float moveSpeed = 0f;
-        input = inputMove.action.ReadValue<float>();
+        input = Input.GetAxisRaw("Horizontal"); //changed to old input system
         if (input <= -_startMovePoint)
         {
             moveSpeed = -1f;

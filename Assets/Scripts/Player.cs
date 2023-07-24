@@ -13,7 +13,14 @@ public class Player : MonoBehaviour
         NoLimb
     };
 
+    public enum MovementState
+    {
+        Move,
+        Jump
+    };
+
     PlayerMovement _playerMovement;
+    PlayerJump _playerJump;
 
     [Header("Input")]
     [SerializeField] InputActionReference _changeLimbState; //for testing
@@ -21,14 +28,15 @@ public class Player : MonoBehaviour
 
 
     LimbState _limbState;
+    public MovementState _movementState;
 
 
     private void Awake()
     {
         _playerMovement = GetComponent<PlayerMovement>();
+        _playerJump = GetComponent<PlayerJump>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (_changeLimbState.action.ReadValue<float>() > 0.5f && buttonDown == false)
@@ -47,6 +55,8 @@ public class Player : MonoBehaviour
         {
             buttonDown = false;
         }
+
+        _playerJump.Jump();
 
         _playerMovement.Move(_limbState);
     }

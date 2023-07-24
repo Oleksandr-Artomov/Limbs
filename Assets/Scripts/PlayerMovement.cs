@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D _rb;
     Player _player;
+    PlayerJump _playerJump;
 
     [Header("Input")]
     [SerializeField] InputActionReference inputMove;
@@ -16,21 +17,27 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float _2ArmMoveSpeed;
     [SerializeField] float _1ArmMoveSpeed;
     [SerializeField] float _rollMoveSpeed;
+    [SerializeField] float _airSpeed;
 
     [SerializeField] float _startMovePoint = 0.5f;
     [SerializeField] float _smoothMoveSpeed = 0.06f; //the higher the number the less responsive it gets
 
     Vector3 zeroVector = Vector3.zero;
 
+    public Vector2 velocity;
+    public Vector2 lastVelocity;
 
-    void Start()
+
+    void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _player = GetComponent<Player>();
+        _playerJump = GetComponent<PlayerJump>();
     }
 
     public void Move(Player.LimbState state)
     {
+        velocity = _rb.velocity;
         float moveSpeed = 0f;
         input = inputMove.action.ReadValue<float>();
         if (input <= -_startMovePoint)

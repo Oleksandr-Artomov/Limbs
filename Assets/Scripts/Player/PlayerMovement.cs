@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] InputActionReference inputMove;
     public float input;
 
-    [Header("Movement")]
+    [Header("Customizable")]
     [SerializeField] float _2LegMoveSpeed;
     [SerializeField] float _1LegMoveSpeed;
     [SerializeField] float _2ArmMoveSpeed;

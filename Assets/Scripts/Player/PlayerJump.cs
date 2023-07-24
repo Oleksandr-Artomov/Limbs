@@ -8,8 +8,7 @@ public class PlayerJump : MonoBehaviour
     Rigidbody2D _rb;
     Player _player;
 
-    bool _canJump;
-
+    [Header("Customizable")]
     [SerializeField]
     private float _jumpHeight;
     [SerializeField]
@@ -21,6 +20,8 @@ public class PlayerJump : MonoBehaviour
     private float _jumpGravity;
     private float _initJumpSpeed;
     private float _jumpTimer;
+
+    bool _canJump;
 
     private void Awake()
     {

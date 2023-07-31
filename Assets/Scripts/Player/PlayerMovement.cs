@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 zeroVector = Vector3.zero;
 
+    public bool facingRight;
+
 
     void Awake()
     {
@@ -39,10 +41,12 @@ public class PlayerMovement : MonoBehaviour
         if (input <= -_startMovePoint)
         {
             moveSpeed = -1f;
+            facingRight = false;
         }
         else if (input >= _startMovePoint)
         {
             moveSpeed = 1f;
+            facingRight = true;
         }
 
         switch (state)

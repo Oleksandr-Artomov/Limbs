@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 17169879}
   m_Layer: 0
   m_Name: Hand1
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 125763879}
   m_Layer: 0
   m_Name: Leg2
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -986,7 +986,7 @@ GameObject:
   - component: {fileID: 1244464206}
   m_Layer: 0
   m_Name: Hand2
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1198,7 +1198,7 @@ GameObject:
   - component: {fileID: 1327649234}
   m_Layer: 0
   m_Name: Leg1
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

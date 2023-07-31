@@ -15,10 +15,12 @@ public class Limb : MonoBehaviour
     {
         Attached,
         Throwing,
+        Returning,
         PickUp
     }
 
     public Player _attachedPlayer;
+    public Transform _anchorPoint;
     Rigidbody2D _rb;
 
     public LimbType _limbType; //this will help most with animations
@@ -28,19 +30,24 @@ public class Limb : MonoBehaviour
     [SerializeField] float _throwSpeed;
     [Tooltip("Put In Angle as a radian")]
     [SerializeField] float _throwAngle;
-    [SerializeField] float _rotationSpeed;
+    [SerializeField] float _angularVelocity;
     private Vector2 _throwVelocity;
 
     private void Start()
     {
+        _limbState = LimbState.PickUp;
+        _rb = GetComponent<Rigidbody2D>();
         _throwVelocity.x = _throwSpeed * Mathf.Cos(_throwAngle);
         _throwVelocity.y = _throwSpeed * Mathf.Sin(_throwAngle);
     }
 
-    public void ThrowLimb()
+    public void ThrowLimb(int direction)
     {
+        _rb.simulated = true;
         _limbState = LimbState.Throwing;
+        _throwVelocity.x *= direction;
         _rb.velocity = _throwVelocity;
+        _rb.angularVelocity = _angularVelocity;
     }
 
     public void LimbAttack()
@@ -50,7 +57,7 @@ public class Limb : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && _limbState == LimbState.PickUp)
         {
             if(collision.gameObject.GetComponent<Player>().CanPickUpLimb(this))
             {

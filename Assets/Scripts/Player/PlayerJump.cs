@@ -38,12 +38,14 @@ public class PlayerJump : MonoBehaviour
 
     public void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _groundCheck.isGrounded && _canJump) //changed to old input system
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded() && _canJump) //changed to old input system
         {
+            Debug.Log("Start Jump");
             StartJump();
         }
         else if (_player._movementState == Player.MovementState.Jump)
         {
+            Debug.Log("Jumping");
             JumpUpdate();
         }
 
@@ -64,21 +66,19 @@ public class PlayerJump : MonoBehaviour
     {
         if (_rb.velocity.y < 0)
         {
-            Debug.Log("fall faster");
             _rb.gravityScale = _gravityScaleFactor * _fallFasterGravityFactor;
         }
         else
         {
-            Debug.Log("nothing happening");
             _rb.gravityScale = _gravityScaleFactor;
         }
 
-        _jumpTimer -= Time.deltaTime;
 
-        if (_jumpTimer <= 0.0f)
+        if (IsGrounded() && _rb.velocity.y <= 0.0f)
         {
+            Debug.Log("Moving");
             _player._movementState = Player.MovementState.Move;
-            _jumpTimer = _jumpTime;
+            _rb.gravityScale = _gravityScaleFactor;
         }
     }
 

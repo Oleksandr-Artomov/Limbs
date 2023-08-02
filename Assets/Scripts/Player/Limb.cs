@@ -4,7 +4,9 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Limb : MonoBehaviour
-{ 
+{
+    [SerializeField]
+    private LimbData _limbData ;
     public enum LimbType
     {
         Arm, 
@@ -25,20 +27,15 @@ public class Limb : MonoBehaviour
 
     public LimbType _limbType; //this will help most with animations
     public LimbState _limbState;
-
-    [Header("Customizable")]
-    [SerializeField] float _throwSpeed;
-    [Tooltip("Put In Angle as a radian")]
-    [SerializeField] float _throwAngle;
-    [SerializeField] float _angularVelocity;
     private Vector2 _throwVelocity;
 
     private void Start()
     {
         _limbState = LimbState.PickUp;
         _rb = GetComponent<Rigidbody2D>();
-        _throwVelocity.x = _throwSpeed * Mathf.Cos(_throwAngle);
-        _throwVelocity.y = _throwSpeed * Mathf.Sin(_throwAngle);
+
+        _throwVelocity.x = _limbData._throwSpeed * Mathf.Cos(_limbData._throwAngle);
+        _throwVelocity.y = _limbData._throwSpeed * Mathf.Sin(_limbData._throwAngle);
     }
 
     public void ThrowLimb(int direction)
@@ -47,7 +44,7 @@ public class Limb : MonoBehaviour
         _limbState = LimbState.Throwing;
         _throwVelocity.x *= direction;
         _rb.velocity = _throwVelocity;
-        _rb.angularVelocity = _angularVelocity;
+        _rb.angularVelocity = _limbData._angularVelocity;
     }
 
     public void LimbAttack()

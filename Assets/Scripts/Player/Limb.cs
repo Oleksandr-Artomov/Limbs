@@ -3,6 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+
+[CreateAssetMenu(fileName ="Limb", menuName ="ScriptableObjects/Limb", order = 1)]
+public class LimbsData : ScriptableObject
+{
+    [Header("Name")]
+    public new string limbName;
+
+    [Header("Stats")]
+    [SerializeField] private float _throwSpeed;
+    [SerializeField] private float _angularvelocity;
+    [SerializeField] private float _knockback;
+    [SerializeField] private float _angularVelocity;
+}
 public class Limb : MonoBehaviour
 { 
     public enum LimbType

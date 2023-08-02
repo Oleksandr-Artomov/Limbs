@@ -30,6 +30,7 @@ public class LimbManager : MonoBehaviour
                 {
                     _limbs[i]._attachedPlayer.RemoveLimb(_limbs[i]);
                     _limbs[i]._limbState = Limb.LimbState.PickUp;
+                    _limbs[i].GetComponent<SpriteRenderer>().color = Color.green;
                 }
             }
         }

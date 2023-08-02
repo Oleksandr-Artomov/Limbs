@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
 
     LimbState _limbState;
     public MovementState _movementState;
-    SelectedLimb _selectedLimb;
+    SelectedLimb _selectedLimb = SelectedLimb.RightArm;
 
     //facing left = -1, right = 1
     int direction;
@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
         }
 
         /*swapping limbs*/
-        if (Input.GetKeyDown(KeyCode.Return) && _limbuttonDown == false) //changed to old input system
+        if (Input.GetKeyDown(KeyCode.LeftShift) && _limbuttonDown == false) //changed to old input system
         {
             //for testing
             if (_limbs[(int)_selectedLimb] != null)
@@ -93,27 +93,29 @@ public class Player : MonoBehaviour
                 _limbs[(int)_selectedLimb].GetComponent<SpriteRenderer>().color = Color.green;
             }
 
-            if (_selectedLimb == SelectedLimb.RightArm)
+            if (_selectedLimb == SelectedLimb.LeftLeg)
             {
-                _selectedLimb = SelectedLimb.LeftLeg;
+                _selectedLimb = SelectedLimb.RightArm;
             }
             else
             {
-                _selectedLimb++;
-            }
-
-            //for testing
-            if (_limbs[(int)_selectedLimb] != null)
-            {
-                _limbs[(int)_selectedLimb].GetComponent<SpriteRenderer>().color = Color.red;
+                _selectedLimb--;
             }
 
             _limbuttonDown = true;
         }
-        else if (Input.GetKeyUp(KeyCode.Return)) //changed to old input system
+        else if (Input.GetKeyUp(KeyCode.LeftShift)) //changed to old input system
         {
             _limbuttonDown = false;
         }
+
+        //for testing
+        if(_limbs[(int)_selectedLimb] != null)
+        {
+            _limbs[(int)_selectedLimb].GetComponent<SpriteRenderer>().color = Color.red;
+        }
+
+
 
         /*throwing limbs*/
         if (Input.GetMouseButtonDown(0) && _limbs[(int)_selectedLimb] != null && _limbs[(int)_selectedLimb]._limbState == Limb.LimbState.Attached) //left mouse button down
@@ -177,9 +179,9 @@ public class Player : MonoBehaviour
             _limbs[i]._limbType = Limb.LimbType.Arm;
         }
 
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), _limbs[i].GetComponent<Collider2D>(), true);
         _limbs[i]._anchorPoint = _limbAnchors[i].transform;
         _limbs[i]._limbState = Limb.LimbState.Attached;
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), _limbs[i].GetComponent<Collider2D>(), true);
         _limbs[i].GetComponent<Rigidbody2D>().simulated = false;
     }
 

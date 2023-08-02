@@ -10,9 +10,9 @@ public class Deadzone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collide)
     {
-        if(collide.CompareTag(("Deadzone")))
+        if (collide.CompareTag(("Deadzone")))
         {
-            transform.position = respawnPoint.transform.position;
+            transform.position = new Vector3(respawnPoint.transform.position.x, respawnPoint.transform.position.x, 0f);
         }
     }
 }

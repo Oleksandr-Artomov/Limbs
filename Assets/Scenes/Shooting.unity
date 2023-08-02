@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 82045749}
   - component: {fileID: 82045748}
   - component: {fileID: 82045747}
+  - component: {fileID: 82045752}
   m_Layer: 0
   m_Name: Limb (3)
   m_TagString: Limb
@@ -276,6 +277,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &82045752
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82045746}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0093797585, y: -0.009698751}
+  serializedVersion: 2
+  m_Radius: 0.63093287
 --- !u!1 &112835077
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,7 +482,7 @@ MonoBehaviour:
   _groundCheck: {fileID: 1704374148}
   _jumpInput: {fileID: 5312239160452987044, guid: eb044a8dc5109984b9c550913304dfc7, type: 3}
   _jumpHeight: 5
-  _jumpTime: 1.16
+  _jumpTime: 0.5
   _fallFasterGravityFactor: 3
 --- !u!114 &517309893
 MonoBehaviour:
@@ -488,7 +505,7 @@ MonoBehaviour:
   _rollMoveSpeed: 2
   _airSpeed: 0
   _startMovePoint: 0.5
-  _smoothMoveSpeed: 0.05
+  _smoothMoveSpeed: 0.2
   facingRight: 0
 --- !u!114 &517309894
 MonoBehaviour:
@@ -632,6 +649,7 @@ GameObject:
   - component: {fileID: 589766613}
   - component: {fileID: 589766612}
   - component: {fileID: 589766611}
+  - component: {fileID: 589766616}
   m_Layer: 0
   m_Name: Limb (2)
   m_TagString: Limb
@@ -772,6 +790,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &589766616
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589766610}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0093797585, y: -0.009698751}
+  serializedVersion: 2
+  m_Radius: 0.63093287
 --- !u!1 &780868401
 GameObject:
   m_ObjectHideFlags: 0
@@ -1202,6 +1236,7 @@ GameObject:
   - component: {fileID: 1612777177}
   - component: {fileID: 1612777176}
   - component: {fileID: 1612777175}
+  - component: {fileID: 1612777180}
   m_Layer: 0
   m_Name: Limb (1)
   m_TagString: Limb
@@ -1342,6 +1377,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1612777180
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612777174}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0093797585, y: -0.009698751}
+  serializedVersion: 2
+  m_Radius: 0.63093287
 --- !u!1 &1675759532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1355,6 +1406,7 @@ GameObject:
   - component: {fileID: 1675759534}
   - component: {fileID: 1675759537}
   - component: {fileID: 1675759533}
+  - component: {fileID: 1675759538}
   m_Layer: 0
   m_Name: Limb
   m_TagString: Limb
@@ -1495,6 +1547,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!58 &1675759538
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675759532}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0093797585, y: -0.009698751}
+  serializedVersion: 2
+  m_Radius: 0.63093287
 --- !u!1 &1704374147
 GameObject:
   m_ObjectHideFlags: 0

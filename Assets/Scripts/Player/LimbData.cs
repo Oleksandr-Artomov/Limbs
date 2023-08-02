@@ -11,4 +11,6 @@ public class LimbData : ScriptableObject
     public float _angularVelocity;
     public float _throwAngle;
     public float _knockback;
+    public float _knockbackCounter;
+    public float _knockbackLength;
 }

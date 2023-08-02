@@ -28,8 +28,10 @@ public class Player : MonoBehaviour
         RightArm
     };
 
+    //Player components
     PlayerMovement _playerMovement;
     PlayerJump _playerJump;
+    [SerializeField] public float _playerHealth;
 
     [Header("Input")]
     [SerializeField] InputActionReference _changeLimbState; //for testing
@@ -43,6 +45,10 @@ public class Player : MonoBehaviour
     //right arm
     public List<Limb> _limbs;
     [SerializeField] List<Transform> _limbAnchors;
+
+    //Colliders
+    public BoxCollider2D _limbCollider;
+    public CapsuleCollider2D _playerCollider;
 
 
     LimbState _limbState;
@@ -63,7 +69,9 @@ public class Player : MonoBehaviour
         {
             _limbs.Add(null);
         }
+
     }
+
 
     void Update()
     {
@@ -128,6 +136,7 @@ public class Player : MonoBehaviour
         }
 
         /*horizontal movement*/
+        
         _playerMovement.Move(_limbState);
 
         /*vertical movement*/
@@ -142,6 +151,7 @@ public class Player : MonoBehaviour
         {
             direction = -1;
         }
+
     }
 
     public bool CanPickUpLimb(Limb limb)

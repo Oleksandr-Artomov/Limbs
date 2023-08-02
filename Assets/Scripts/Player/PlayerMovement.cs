@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D _rb;
     Player _player;
     PlayerJump _playerJump;
+    Limb _limb;
 
     [Header("Input")]
     [SerializeField] InputActionReference inputMove;
@@ -32,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _player = GetComponent<Player>();
         _playerJump = GetComponent<PlayerJump>();
+        _limb = GetComponent<Limb>();
     }
 
     public void Move(Player.LimbState state)

@@ -33,6 +33,8 @@ public class Limb : MonoBehaviour
     {
         _limbState = LimbState.PickUp;
         _rb = GetComponent<Rigidbody2D>();
+        _attachedPlayer = GetComponent<Player>();
+        
 
         _throwVelocity.x = _limbData._throwSpeed * Mathf.Cos(_limbData._throwAngle);
         _throwVelocity.y = _limbData._throwSpeed * Mathf.Sin(_limbData._throwAngle);
@@ -56,6 +58,7 @@ public class Limb : MonoBehaviour
     {
     }
 
+    // Limb knockback and pickup
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player" && _limbState == LimbState.PickUp)
@@ -64,6 +67,17 @@ public class Limb : MonoBehaviour
             {
                 _attachedPlayer = collision.gameObject.GetComponent<Player>();
             }
+        }
+
+        if (collision.gameObject.tag == "Player" && _limbState == LimbState.Throwing)
+        {
+            //Knockback
+
+            //Take Damage
+
+            //_attachedPlayer._playerHealth
+            
+            Debug.Log("Limb hit");
         }
     }
 }

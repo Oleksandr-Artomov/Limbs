@@ -36,8 +36,11 @@ public class Limb : MonoBehaviour
         _attachedPlayer = GetComponent<Player>();
         
 
-        _throwVelocity.x = _limbData._throwSpeed * Mathf.Cos(_limbData._throwAngle);
-        _throwVelocity.y = _limbData._throwSpeed * Mathf.Sin(_limbData._throwAngle);
+
+        float angle = _limbData._throwAngle * Mathf.Deg2Rad;
+
+        _throwVelocity.x = _limbData._throwSpeed * Mathf.Cos(angle);
+        _throwVelocity.y = _limbData._throwSpeed * Mathf.Sin(angle);
     }
 
     public void ThrowLimb(int direction)

@@ -33,10 +33,10 @@ public class Player : MonoBehaviour
     PlayerJump _playerJump;
     [SerializeField] public float _playerHealth;
 
-    [Header("Input")]
-    [SerializeField] InputActionReference _changeLimbState; //for testing
-    bool buttonDown = false;//for testing
-    bool _limbuttonDown = false;//for testing
+    float _swapLimbInput;
+    public float _throwLimbInput;
+
+    bool _limbButtonDown;
 
     //the location of the limb in the list dictates what limb it is
     //left leg
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
     public CapsuleCollider2D _playerCollider;
 
 
-    LimbState _limbState;
+    public LimbState _limbState;
     public MovementState _movementState;
     SelectedLimb _selectedLimb = SelectedLimb.RightArm;
 
@@ -75,25 +75,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightShift) && buttonDown == false) //changed to old input system
-        {
-            if (_limbState == LimbState.NoLimb)
-            {
-                _limbState = LimbState.TwoLeg;
-            }
-            else
-            {
-                _limbState++;
-            }
-            buttonDown = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.RightShift)) //changed to old input system
-        {
-            buttonDown = false;
-        }
-
         /*swapping limbs*/
-        if (Input.GetKeyDown(KeyCode.LeftShift) && _limbuttonDown == false) //changed to old input system
+        if (_swapLimbInput > 0.5f && _limbButtonDown == false) //changed to old input system
         {
             //for testing
             if (_limbs[(int)_selectedLimb] != null)
@@ -110,11 +93,11 @@ public class Player : MonoBehaviour
                 _selectedLimb--;
             }
 
-            _limbuttonDown = true;
+            _limbButtonDown = true;
         }
-        else if (Input.GetKeyUp(KeyCode.LeftShift)) //changed to old input system
+        else if (_swapLimbInput < 0.5f) //changed to old input system
         {
-            _limbuttonDown = false;
+            _limbButtonDown = false;
         }
 
         //for testing
@@ -126,14 +109,14 @@ public class Player : MonoBehaviour
 
 
         /*throwing limbs*/
-        if (Input.GetMouseButtonDown(0) && _limbs[(int)_selectedLimb] != null && _limbs[(int)_selectedLimb]._limbState == Limb.LimbState.Attached) //left mouse button down
+        if (_throwLimbInput > 0.5f && _limbs[(int)_selectedLimb] != null && _limbs[(int)_selectedLimb]._limbState == Limb.LimbState.Attached) //left mouse button down
         {
             _limbs[(int)_selectedLimb].ThrowLimb(direction);
         }
-        if (Input.GetMouseButtonDown(1) && _limbs[(int)_selectedLimb] != null && _limbs[(int)_selectedLimb]._limbState == Limb.LimbState.Attached) //left mouse button down
-        {
-            _limbs[(int)_selectedLimb].LimbAttack();
-        }
+
+
+        //limb attack?
+
 
         /*horizontal movement*/
         
@@ -206,4 +189,7 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    public void SwapLimbInput(InputAction.CallbackContext ctx) => _swapLimbInput = ctx.ReadValue<float>();
+    public void ThrowLimbInput(InputAction.CallbackContext ctx) => _throwLimbInput = ctx.ReadValue<float>();
 }

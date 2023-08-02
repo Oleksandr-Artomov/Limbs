@@ -8,9 +8,7 @@ public class PlayerMovement : MonoBehaviour
     PlayerJump _playerJump;
     Limb _limb;
 
-    [Header("Input")]
-    [SerializeField] InputActionReference inputMove;
-    public float input;
+    float _moveInput;
 
     [Header("Customizable")]
     [SerializeField] float _2LegMoveSpeed;
@@ -39,13 +37,12 @@ public class PlayerMovement : MonoBehaviour
     public void Move(Player.LimbState state)
     {
         float moveSpeed = 0f;
-        input = Input.GetAxisRaw("Horizontal"); //changed to old input system
-        if (input <= -_startMovePoint)
+        if (_moveInput <= -_startMovePoint)
         {
             moveSpeed = -1f;
             facingRight = false;
         }
-        else if (input >= _startMovePoint)
+        else if (_moveInput >= _startMovePoint)
         {
             moveSpeed = 1f;
             facingRight = true;
@@ -74,4 +71,6 @@ public class PlayerMovement : MonoBehaviour
         Vector3 targetVelocity = new Vector2(moveSpeed, _rb.velocity.y);
         _rb.velocity = Vector3.SmoothDamp(_rb.velocity, targetVelocity, ref zeroVector, _smoothMoveSpeed);
     }
+
+    public void MoveInput(InputAction.CallbackContext ctx) => _moveInput = ctx.ReadValue<float>();
 }

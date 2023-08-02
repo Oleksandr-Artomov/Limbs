@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerJump : MonoBehaviour
 {
     [SerializeField] GroundCheck _groundCheck;
-    [SerializeField] InputActionReference _jumpInput;
+    float _jumpInput;
     Rigidbody2D _rb;
     Player _player;
 
@@ -38,7 +38,7 @@ public class PlayerJump : MonoBehaviour
 
     public void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded() && _canJump) //changed to old input system
+        if (_jumpInput > 0.5f && IsGrounded() && _canJump) //changed to old input system
         {
             Debug.Log("Start Jump");
             StartJump();
@@ -49,7 +49,7 @@ public class PlayerJump : MonoBehaviour
             JumpUpdate();
         }
 
-        if (Input.GetKeyUp(KeyCode.Space)) //changed to old input system
+        if (_jumpInput < 0.5f) //changed to old input system
         {
             _canJump = true;
         }
@@ -86,4 +86,6 @@ public class PlayerJump : MonoBehaviour
     {
         return _groundCheck.isGrounded;
     }
+
+    public void JumpInput(InputAction.CallbackContext ctx) => _jumpInput = ctx.action.ReadValue<float>();
 }

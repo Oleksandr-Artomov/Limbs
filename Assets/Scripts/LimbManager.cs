@@ -35,4 +35,9 @@ public class LimbManager : MonoBehaviour
             }
         }
     }
+
+    public void AddLimb(Limb limb)
+    {
+        _limbs.Add(limb);
+    }
 }

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7031586765184258108}
   - component: {fileID: 7031586765184258109}
   - component: {fileID: 7031586765184258082}
-  - component: {fileID: 7031586765184258110}
   - component: {fileID: 7031586765184258081}
+  - component: {fileID: 7031586765184258110}
   m_Layer: 0
   m_Name: Limbs
   m_TagString: Limb
@@ -135,23 +135,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7031586765184258110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479936713415687806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fc2716bc56ce7f4293f7fbf532b5e2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _limbData: {fileID: 11400000, guid: 7db5ad02bfa64c444910bd9ec06de21c, type: 2}
-  _attachedPlayer: {fileID: 0}
-  _anchorPoint: {fileID: 0}
-  _limbType: 0
-  _limbState: 0
 --- !u!58 &7031586765184258081
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -168,3 +151,20 @@ CircleCollider2D:
   m_Offset: {x: 0.0093797585, y: -0.009698751}
   serializedVersion: 2
   m_Radius: 0.63093287
+--- !u!114 &7031586765184258110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479936713415687806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fc2716bc56ce7f4293f7fbf532b5e2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _limbData: {fileID: 11400000, guid: 76d2735fb647a41419933b8acfdb8866, type: 2}
+  _attachedPlayer: {fileID: 0}
+  _anchorPoint: {fileID: 0}
+  _limbType: 0
+  _limbState: 0

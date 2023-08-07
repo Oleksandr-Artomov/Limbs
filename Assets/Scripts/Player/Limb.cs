@@ -33,9 +33,6 @@ public class Limb : MonoBehaviour
     {
         _limbState = LimbState.PickUp;
         _rb = GetComponent<Rigidbody2D>();
-        _attachedPlayer = GetComponent<Player>();
-        
-
 
         float angle = _limbData._throwAngle * Mathf.Deg2Rad;
 

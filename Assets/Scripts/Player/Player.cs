@@ -119,6 +119,8 @@ public class Player : MonoBehaviour
 
 
         /*horizontal movement*/
+
+        CheckLimbState();
         
         _playerMovement.Move(_limbState);
 
@@ -184,7 +186,6 @@ public class Player : MonoBehaviour
         {
             if (limb == _limbs[i])
             {
-                Physics2D.IgnoreCollision(GetComponent<Collider2D>(), _limbs[i].GetComponent<Collider2D>(), false);
                 _limbs[i] = null;
             }
         }
@@ -192,4 +193,32 @@ public class Player : MonoBehaviour
 
     public void SwapLimbInput(InputAction.CallbackContext ctx) => _swapLimbInput = ctx.ReadValue<float>();
     public void ThrowLimbInput(InputAction.CallbackContext ctx) => _throwLimbInput = ctx.ReadValue<float>();
+
+    public void CheckLimbState()
+    {
+        if (_limbs[0] != null || _limbs[1] != null)
+        {
+            if (_limbs[0] == null || _limbs[1] == null)
+            {
+                _limbState = LimbState.OneLeg;
+                return;
+            }
+
+            _limbState = LimbState.TwoLeg;
+            return;
+        }
+        if (_limbs[2] != null || _limbs[3] != null)
+        {
+            if (_limbs[2] == null || _limbs[3] == null)
+            {
+                _limbState = LimbState.OneArm;
+                return;
+            }
+
+            _limbState = LimbState.TwoArm;
+            return;
+        }
+
+        _limbState = LimbState.NoLimb;
+    }
 }

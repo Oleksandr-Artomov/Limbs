@@ -16,6 +16,8 @@ public class PlayerJump : MonoBehaviour
     [SerializeField]
     private float _fallFasterGravityFactor;
     [SerializeField]
+    private float _earlyExitGravityFactor;
+    [SerializeField]
     private float _jumpBufferLength;
 
     private float _gravityScaleFactor;
@@ -75,7 +77,11 @@ public class PlayerJump : MonoBehaviour
 
     private void JumpUpdate()
     {
-        if (_rb.velocity.y < 0)
+        if (_jumpInput == 0f && _rb.velocity.y > 0f)
+        {
+            _rb.gravityScale = _gravityScaleFactor * _earlyExitGravityFactor;
+        }
+        else if (_rb.velocity.y < 0)
         {
             _rb.gravityScale = _gravityScaleFactor * _fallFasterGravityFactor;
         }
@@ -87,7 +93,6 @@ public class PlayerJump : MonoBehaviour
 
         if (IsGrounded() && _rb.velocity.y <= 0.0f)
         {
-            Debug.Log("Moving");
             _player._movementState = Player.MovementState.Move;
             _rb.gravityScale = _gravityScaleFactor;
         }

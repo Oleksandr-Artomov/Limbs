@@ -194,7 +194,8 @@ MonoBehaviour:
   _groundCheck: {fileID: 8385072270942222215}
   _jumpHeight: 5
   _jumpTime: 0.5
-  _fallFasterGravityFactor: 3
+  _fallFasterGravityFactor: 2
+  _earlyExitGravityFactor: 3
   _jumpBufferLength: 0.1
 --- !u!114 &8385072269478469056
 MonoBehaviour:

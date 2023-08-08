@@ -20,7 +20,7 @@ public class LimbManager : MonoBehaviour
     {
         for (int i = 0; i < _limbs.Count; i++)
         {
-            if (_limbs[i]._limbState == Limb.LimbState.Attached)
+            if (_limbs[i]._limbState == Limb.LimbState.Attached && _limbs[i]._anchorPoint != null)
             {
                 _limbs[i].transform.position = _limbs[i]._anchorPoint.position;
             }

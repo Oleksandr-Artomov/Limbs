@@ -424,10 +424,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _groundCheck: {fileID: 1704374148}
-  _jumpInput: {fileID: 5312239160452987044, guid: eb044a8dc5109984b9c550913304dfc7, type: 3}
   _jumpHeight: 5
   _jumpTime: 0.5
   _fallFasterGravityFactor: 3
+  _earlyExitGravityFactor: 0
+  _jumpBufferLength: 0
+  _maxCoyoteFrames: 0
 --- !u!114 &517309893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,8 +442,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d94216eac7ce8ad489e4b3202e570f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputMove: {fileID: 3100470395318404829, guid: eb044a8dc5109984b9c550913304dfc7, type: 3}
-  input: 0
   _2LegMoveSpeed: 10
   _1LegMoveSpeed: 8
   _2ArmMoveSpeed: 6
@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerHealth: 0
-  _changeLimbState: {fileID: -5039579834458612749, guid: eb044a8dc5109984b9c550913304dfc7, type: 3}
+  _throwLimbInput: 0
   _limbs: []
   _limbAnchors:
   - {fileID: 112835078}
@@ -473,7 +473,9 @@ MonoBehaviour:
   - {fileID: 1856348127}
   _limbCollider: {fileID: 0}
   _playerCollider: {fileID: 0}
+  _limbState: 0
   _movementState: 0
+  direction: 0
 --- !u!70 &517309895
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -839,7 +841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8385072269478469061, guid: 649683c44e1b6be4e8384613133503a2, type: 3}
       propertyPath: _playerHealth
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 649683c44e1b6be4e8384613133503a2, type: 3}
@@ -1127,8 +1129,6 @@ GameObject:
   - component: {fileID: 1775290299}
   - component: {fileID: 1775290298}
   - component: {fileID: 1775290297}
-  - component: {fileID: 1775290303}
-  - component: {fileID: 1775290302}
   m_Layer: 0
   m_Name: Player (2)
   m_TagString: Player
@@ -1246,55 +1246,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1775290296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.94, y: 3.76, z: 0}
+  m_LocalPosition: {x: -7.18, y: 2.62, z: 0}
   m_LocalScale: {x: 7.0480113, y: 5.8822703, z: 7.0480113}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1775290302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1775290296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34b6f88f90005fe4bbaa2d53382aba45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerHealth: 0
-  _changeLimbState: {fileID: 0}
-  _limbs: []
-  _limbAnchors: []
-  _limbCollider: {fileID: 0}
-  _playerCollider: {fileID: 0}
-  _movementState: 0
---- !u!114 &1775290303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1775290296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d94216eac7ce8ad489e4b3202e570f3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputMove: {fileID: 0}
-  input: 0
-  _2LegMoveSpeed: 0
-  _1LegMoveSpeed: 0
-  _2ArmMoveSpeed: 0
-  _1ArmMoveSpeed: 0
-  _rollMoveSpeed: 0
-  _airSpeed: 0
-  _startMovePoint: 0.5
-  _smoothMoveSpeed: 0.06
-  facingRight: 0
 --- !u!1 &1856348126
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,9 +27,9 @@ public class PlayerJump : MonoBehaviour
     private float _initJumpSpeed;
     private float _jumpBufferTimer;
     private float _coyoteFrames;
-    
 
 
+    private bool _doubleJump;
     bool _canJump;
 
     private void Awake()
@@ -66,15 +66,18 @@ public class PlayerJump : MonoBehaviour
 
         if (_jumpBufferTimer > 0f && _canJump) 
         {
-            if (IsGrounded() || _coyoteFrames > 0f)
+            if (IsGrounded() || _coyoteFrames > 0f || _doubleJump)
             {
                 _jumpBufferTimer = 0f;
                 _coyoteFrames = 0f;
                 StartJump();
+
+                _doubleJump = !_doubleJump;
             }
         }
         else if (_player._movementState == Player.MovementState.Jump)
         {
+        
             JumpUpdate();
         }
 
@@ -111,6 +114,7 @@ public class PlayerJump : MonoBehaviour
         {
             _player._movementState = Player.MovementState.Move;
             _rb.gravityScale = _gravityScaleFactor;
+            _doubleJump = false;
         }
     }
 

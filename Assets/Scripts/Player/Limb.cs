@@ -55,10 +55,6 @@ public class Limb : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-    }
-
     // Limb knockback and pickup
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -75,8 +71,8 @@ public class Limb : MonoBehaviour
             //Knockback
 
             //Take Damage
+            _attachedPlayer._playerHealth = _attachedPlayer._playerHealth - 10;
 
-            //_attachedPlayer._playerHealth
             
             Debug.Log("Limb hit");
         }

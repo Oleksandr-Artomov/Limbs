@@ -205,7 +205,7 @@ public class Player : MonoBehaviour
         _limbState = LimbState.NoLimb;
     }
 
-    private void SelectNextLimb()
+    public void SelectNextLimb()
     {
         //for testing
         if (_limbs[(int)_selectedLimb] != null)

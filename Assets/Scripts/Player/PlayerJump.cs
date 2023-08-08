@@ -19,11 +19,14 @@ public class PlayerJump : MonoBehaviour
     private float _earlyExitGravityFactor;
     [SerializeField]
     private float _jumpBufferLength;
+    [SerializeField]
+    private float _maxCoyoteFrames;
 
     private float _gravityScaleFactor;
     private float _jumpGravity;
     private float _initJumpSpeed;
     private float _jumpBufferTimer;
+    private float _coyoteFrames;
     
 
 
@@ -42,7 +45,16 @@ public class PlayerJump : MonoBehaviour
 
     public void Jump()
     {
-        if (_jumpInput > 0.5f)
+        if (IsGrounded())
+        {
+            _coyoteFrames = _maxCoyoteFrames;
+        }
+        else
+        {
+            _coyoteFrames--;
+        }
+
+        if (_jumpInput > 0.5f && _canJump)
         {
             _jumpBufferTimer = _jumpBufferLength;
         }
@@ -52,10 +64,14 @@ public class PlayerJump : MonoBehaviour
         }
 
 
-        if (_jumpBufferTimer > 0f && IsGrounded() && _canJump) 
+        if (_jumpBufferTimer > 0f && _canJump) 
         {
-            _jumpBufferTimer = 0f;
-            StartJump();
+            if (IsGrounded() || _coyoteFrames > 0f)
+            {
+                _jumpBufferTimer = 0f;
+                _coyoteFrames = 0f;
+                StartJump();
+            }
         }
         else if (_player._movementState == Player.MovementState.Jump)
         {

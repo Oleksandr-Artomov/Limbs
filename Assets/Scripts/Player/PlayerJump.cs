@@ -15,11 +15,15 @@ public class PlayerJump : MonoBehaviour
     private float _jumpTime;
     [SerializeField]
     private float _fallFasterGravityFactor;
+    [SerializeField]
+    private float _jumpBufferLength;
 
     private float _gravityScaleFactor;
     private float _jumpGravity;
     private float _initJumpSpeed;
-    private float _jumpTimer;
+    private float _jumpBufferTimer;
+    
+
 
     bool _canJump;
 
@@ -32,24 +36,31 @@ public class PlayerJump : MonoBehaviour
         _gravityScaleFactor = _jumpGravity / Physics2D.gravity.y;
         _rb.gravityScale = _gravityScaleFactor;
         _initJumpSpeed = -_jumpGravity * _jumpTime;
-
-        _jumpTimer = _jumpTime;
     }
 
     public void Jump()
     {
-        if (_jumpInput > 0.5f && IsGrounded() && _canJump) //changed to old input system
+        if (_jumpInput > 0.5f)
         {
-            Debug.Log("Start Jump");
+            _jumpBufferTimer = _jumpBufferLength;
+        }
+        else
+        {
+            _jumpBufferTimer -= Time.deltaTime;
+        }
+
+
+        if (_jumpBufferTimer > 0f && IsGrounded() && _canJump) 
+        {
+            _jumpBufferTimer = 0f;
             StartJump();
         }
         else if (_player._movementState == Player.MovementState.Jump)
         {
-            Debug.Log("Jumping");
             JumpUpdate();
         }
 
-        if (_jumpInput < 0.5f) //changed to old input system
+        if (_jumpInput < 0.5f) 
         {
             _canJump = true;
         }

@@ -1080,6 +1080,8 @@ MonoBehaviour:
   - {fileID: 768787119808473117, guid: a8ce0af062f424e4ba5831494e9b891a, type: 3}
   _limbLimit: 5
   _startLimbCount: 4
+  _minSpawnTimer: 10
+  _maxSpawnTimer: 30
 --- !u!1 &989077892
 GameObject:
   m_ObjectHideFlags: 0

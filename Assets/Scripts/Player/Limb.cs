@@ -22,7 +22,7 @@ public class Limb : MonoBehaviour
     }
 
     public Player _attachedPlayer;
-    public Transform _anchorPoint;
+    public Transform _anchorPoint = null;
     Rigidbody2D _rb;
 
     public LimbType _limbType; //this will help most with animations
@@ -44,6 +44,7 @@ public class Limb : MonoBehaviour
     {
         _rb.simulated = true;
         _limbState = LimbState.Throwing;
+        _throwVelocity.x = Mathf.Abs(_throwVelocity.x);
         _throwVelocity.x *= direction;
         _rb.velocity = _throwVelocity;
         _rb.angularVelocity = _limbData._angularVelocity;

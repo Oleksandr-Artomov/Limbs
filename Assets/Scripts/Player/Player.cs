@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
     SelectedLimb _selectedLimb = SelectedLimb.RightArm;
 
     //facing left = -1, right = 1
-    int direction;
+    public int direction;
 
 
     private void Awake()
@@ -76,40 +76,34 @@ public class Player : MonoBehaviour
     void Update()
     {
         /*swapping limbs*/
-        if (_swapLimbInput > 0.5f && _limbButtonDown == false) //changed to old input system
+        if (Mathf.Abs(_swapLimbInput) > 0.5f && _limbButtonDown == false)
         {
-            //for testing
-            if (_limbs[(int)_selectedLimb] != null)
-            {
-                _limbs[(int)_selectedLimb].GetComponent<SpriteRenderer>().color = Color.green;
-            }
-
-            if (_selectedLimb == SelectedLimb.LeftLeg)
-            {
-                _selectedLimb = SelectedLimb.RightArm;
-            }
-            else
-            {
-                _selectedLimb--;
-            }
-
+            SelectNextLimb();
             _limbButtonDown = true;
         }
-        else if (_swapLimbInput < 0.5f) //changed to old input system
+        else if (Mathf.Abs(_swapLimbInput) < 0.5f)
         {
             _limbButtonDown = false;
         }
 
         //for testing
-        if(_limbs[(int)_selectedLimb] != null)
+        if (_limbs[(int)_selectedLimb] != null)
         {
             _limbs[(int)_selectedLimb].GetComponent<SpriteRenderer>().color = Color.red;
         }
 
 
+        if (_playerMovement.facingRight)
+        {
+            direction = 1;
+        }
+        else
+        {
+            direction = -1;
+        }
 
         /*throwing limbs*/
-        if (_throwLimbInput > 0.5f && _limbs[(int)_selectedLimb] != null && _limbs[(int)_selectedLimb]._limbState == Limb.LimbState.Attached) //left mouse button down
+        if (_throwLimbInput > 0.5f && _limbs[(int)_selectedLimb] != null && _limbs[(int)_selectedLimb]._limbState == Limb.LimbState.Attached) 
         {
             _limbs[(int)_selectedLimb].ThrowLimb(direction);
         }
@@ -126,17 +120,6 @@ public class Player : MonoBehaviour
 
         /*vertical movement*/
         _playerJump.Jump();
-
-        //check if player is facing right
-        if (_playerMovement.facingRight)
-        {
-            direction = 1;
-        }
-        else
-        {
-            direction = -1;
-        }
-
     }
 
     public bool CanPickUpLimb(Limb limb)
@@ -220,5 +203,42 @@ public class Player : MonoBehaviour
         }
 
         _limbState = LimbState.NoLimb;
+    }
+
+    private void SelectNextLimb()
+    {
+        //for testing
+        if (_limbs[(int)_selectedLimb] != null)
+        {
+            _limbs[(int)_selectedLimb].GetComponent<SpriteRenderer>().color = Color.green;
+        }
+
+        if (_swapLimbInput > 0.0f)
+        {
+            if (_selectedLimb == SelectedLimb.LeftLeg)
+            {
+                _selectedLimb = SelectedLimb.RightArm;
+            }
+            else
+            {
+                _selectedLimb--;
+            }
+        }
+        else
+        {
+            if (_selectedLimb == SelectedLimb.RightArm)
+            {
+                _selectedLimb = SelectedLimb.LeftLeg;
+            }
+            else
+            {
+                _selectedLimb++;
+            }
+        }
+
+        if (_limbs[(int)_selectedLimb] == null && _limbState != LimbState.NoLimb)
+        {
+            SelectNextLimb();
+        }
     }
 }

@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b6f88f90005fe4bbaa2d53382aba45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerHealth: 0
   _throwLimbInput: 0
   _limbs: []
   _limbAnchors:
@@ -152,8 +153,11 @@ MonoBehaviour:
   - {fileID: 8385072269473608607}
   - {fileID: 8385072269343438437}
   - {fileID: 8385072270821689308}
+  _limbCollider: {fileID: 0}
+  _playerCollider: {fileID: 0}
   _limbState: 0
   _movementState: 0
+  direction: 0
 --- !u!114 &8385072269478469062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +195,7 @@ MonoBehaviour:
   _jumpHeight: 5
   _jumpTime: 0.5
   _fallFasterGravityFactor: 3
+  _jumpBufferLength: 0.1
 --- !u!114 &8385072269478469056
 MonoBehaviour:
   m_ObjectHideFlags: 0

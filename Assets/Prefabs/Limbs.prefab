@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7031586765184258082}
   - component: {fileID: 7031586765184258081}
   - component: {fileID: 7031586765184258110}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Limbs
   m_TagString: Limb
   m_Icon: {fileID: 0}

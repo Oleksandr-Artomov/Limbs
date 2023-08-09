@@ -9,8 +9,6 @@ public class Player : MonoBehaviour
     {
         TwoLeg,
         OneLeg,
-        TwoArm,
-        OneArm,
         NoLimb
     };
 
@@ -188,17 +186,6 @@ public class Player : MonoBehaviour
             }
 
             _limbState = LimbState.TwoLeg;
-            return;
-        }
-        if (_limbs[2] != null || _limbs[3] != null)
-        {
-            if (_limbs[2] == null || _limbs[3] == null)
-            {
-                _limbState = LimbState.OneArm;
-                return;
-            }
-
-            _limbState = LimbState.TwoArm;
             return;
         }
 

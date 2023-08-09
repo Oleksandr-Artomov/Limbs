@@ -172,10 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _2LegMoveSpeed: 10
   _1LegMoveSpeed: 8
-  _2ArmMoveSpeed: 6
-  _1ArmMoveSpeed: 4
-  _rollMoveSpeed: 2
-  _airSpeed: 0
+  _hopForce: {x: 5.74, y: 1, z: 0}
   _startMovePoint: 0.5
   _smoothMoveSpeed: 0.2
   facingRight: 0
@@ -198,6 +195,8 @@ MonoBehaviour:
   _earlyExitGravityFactor: 3
   _maxJumpBufferFrames: 20
   _maxCoyoteFrames: 20
+  _canDoubleJump: 0
+  _isDoubleJumping: 0
 --- !u!114 &8385072269478469056
 MonoBehaviour:
   m_ObjectHideFlags: 0

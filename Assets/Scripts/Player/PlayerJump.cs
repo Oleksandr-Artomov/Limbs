@@ -28,9 +28,9 @@ public class PlayerJump : MonoBehaviour
     private float _jumpBufferFrames;
     private float _coyoteFrames;
     
-
-
     bool _canJump;
+    public bool _canDoubleJump;
+    public bool _isDoubleJumping;
 
     private void Awake()
     {
@@ -48,10 +48,16 @@ public class PlayerJump : MonoBehaviour
         if (IsGrounded() && _player._movementState == Player.MovementState.Move)
         {
             _coyoteFrames = _maxCoyoteFrames;
+            _canDoubleJump = false;
+            _isDoubleJumping = false;
         }
         else
         {
             _coyoteFrames--;
+            if (!_isDoubleJumping)
+            {
+                _canDoubleJump = true;
+            }
         }
 
         if (_jumpInput > 0.5f && _canJump)
@@ -63,7 +69,7 @@ public class PlayerJump : MonoBehaviour
             _jumpBufferFrames--;
         }
 
-        if (_jumpBufferFrames > 0f && _coyoteFrames > 0f) 
+        if (_jumpBufferFrames > 0f && _coyoteFrames > 0f || _canDoubleJump && _jumpInput > 0.5f && _canJump) 
         {
             _jumpBufferFrames = 0f;
             _coyoteFrames = 0f;
@@ -85,8 +91,18 @@ public class PlayerJump : MonoBehaviour
         _canJump = false;
         _rb.velocity = new Vector3(_rb.velocity.x, 0f, 0f);
         _rb.gravityScale = _gravityScaleFactor;
-        _rb.AddForce(_rb.mass * Vector2.up * _initJumpSpeed, ForceMode2D.Impulse);
         _player._movementState = Player.MovementState.Jump;
+
+        if (_canDoubleJump)
+        {
+            _rb.AddForce(_rb.mass * Vector2.up * _initJumpSpeed * 0.6f, ForceMode2D.Impulse);
+            _canDoubleJump = false;
+            _isDoubleJumping = true;
+        }
+        else
+        {
+            _rb.AddForce(_rb.mass * Vector2.up * _initJumpSpeed, ForceMode2D.Impulse);
+        }
     }
 
     private void JumpUpdate()

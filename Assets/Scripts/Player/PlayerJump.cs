@@ -18,14 +18,14 @@ public class PlayerJump : MonoBehaviour
     [SerializeField]
     private float _earlyExitGravityFactor;
     [SerializeField]
-    private float _jumpBufferLength;
+    private float _maxJumpBufferFrames;
     [SerializeField]
     private float _maxCoyoteFrames;
 
     private float _gravityScaleFactor;
     private float _jumpGravity;
     private float _initJumpSpeed;
-    private float _jumpBufferTimer;
+    private float _jumpBufferFrames;
     private float _coyoteFrames;
     
 
@@ -45,7 +45,7 @@ public class PlayerJump : MonoBehaviour
 
     public void Jump()
     {
-        if (IsGrounded())
+        if (IsGrounded() && _player._movementState == Player.MovementState.Move)
         {
             _coyoteFrames = _maxCoyoteFrames;
         }
@@ -56,22 +56,18 @@ public class PlayerJump : MonoBehaviour
 
         if (_jumpInput > 0.5f && _canJump)
         {
-            _jumpBufferTimer = _jumpBufferLength;
+            _jumpBufferFrames = _maxJumpBufferFrames;
         }
         else
         {
-            _jumpBufferTimer -= Time.deltaTime;
+            _jumpBufferFrames--;
         }
 
-
-        if (_jumpBufferTimer > 0f && _canJump) 
+        if (_jumpBufferFrames > 0f && _coyoteFrames > 0f) 
         {
-            if (IsGrounded() || _coyoteFrames > 0f)
-            {
-                _jumpBufferTimer = 0f;
-                _coyoteFrames = 0f;
-                StartJump();
-            }
+            _jumpBufferFrames = 0f;
+            _coyoteFrames = 0f;
+            StartJump();
         }
         else if (_player._movementState == Player.MovementState.Jump)
         {
@@ -87,6 +83,8 @@ public class PlayerJump : MonoBehaviour
     private void StartJump()
     {
         _canJump = false;
+        _rb.velocity = new Vector3(_rb.velocity.x, 0f, 0f);
+        _rb.gravityScale = _gravityScaleFactor;
         _rb.AddForce(_rb.mass * Vector2.up * _initJumpSpeed, ForceMode2D.Impulse);
         _player._movementState = Player.MovementState.Jump;
     }

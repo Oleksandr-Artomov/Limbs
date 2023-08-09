@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc105bb179138bc4e9e731551038337b, type: 3}
   m_Name: Default Limb
   m_EditorClassIdentifier: 
-  _throwSpeed: 15
+  _throwSpeed: 25
   _angularVelocity: 1000
-  _throwAngle: 45
+  _throwAngle: 15
   _knockback: 1
+  _knockbackCounter: 0
+  _knockbackLength: 0

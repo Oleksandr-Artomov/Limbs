@@ -196,7 +196,7 @@ MonoBehaviour:
   _jumpTime: 0.5
   _fallFasterGravityFactor: 2
   _earlyExitGravityFactor: 3
-  _jumpBufferLength: 0.1
+  _maxJumpBufferFrames: 20
   _maxCoyoteFrames: 20
 --- !u!114 &8385072269478469056
 MonoBehaviour:

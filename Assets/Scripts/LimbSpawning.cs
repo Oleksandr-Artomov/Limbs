@@ -71,6 +71,8 @@ public class LimbSpawning : MonoBehaviour
     private void SpawnLimb()
     {
         int index = rnd.Next(_limbOptions.Count);
+        double val = rnd.NextDouble() * (_right - _left) + _left;
+        _spawnPosX = (float)val;
         Limb limb = Instantiate(_limbOptions[index], new Vector3(_spawnPosX, _spawnPosY, 0), Quaternion.identity).GetComponent<Limb>();
         _limbManager.AddLimb(limb);
         _currentLimbs++;

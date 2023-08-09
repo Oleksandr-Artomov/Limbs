@@ -48,6 +48,7 @@ public class Limb : MonoBehaviour
         _throwVelocity.x *= direction;
         _rb.velocity = _throwVelocity;
         _rb.angularVelocity = _limbData._angularVelocity;
+            //recoil when throwing
     }
 
     public void LimbAttack()
@@ -55,12 +56,23 @@ public class Limb : MonoBehaviour
 
     }
 
+    //Limb knockback and damage
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.tag == "Player" && _limbState == LimbState.Throwing)
+        {
+            //Knockback
+
+            //Take Damage
+
+            //_attachedPlayer._playerHealth
+
+            Debug.Log("Limb hit");
+        }
     }
 
-    // Limb knockback and pickup
-    private void OnTriggerEnter2D(Collider2D collision)
+    //pickup
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player" && _limbState == LimbState.PickUp)
         {
@@ -69,16 +81,16 @@ public class Limb : MonoBehaviour
                 _attachedPlayer = collision.gameObject.GetComponent<Player>();
             }
         }
+    }
 
-        if (collision.gameObject.tag == "Player" && _limbState == LimbState.Throwing)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player" && _limbState == LimbState.PickUp)
         {
-            //Knockback
-
-            //Take Damage
-
-            //_attachedPlayer._playerHealth
-            
-            Debug.Log("Limb hit");
+            if (collision.gameObject.GetComponent<Player>().CanPickUpLimb(this))
+            {
+                _attachedPlayer = collision.gameObject.GetComponent<Player>();
+            }
         }
     }
 }

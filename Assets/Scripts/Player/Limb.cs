@@ -64,6 +64,7 @@ public class Limb : MonoBehaviour
             _healthPlayer = collision.gameObject.GetComponent<Health>();
             _healthPlayer._health -= 5.0f;
             Debug.Log("Limb hit");
+
         }
     }
 

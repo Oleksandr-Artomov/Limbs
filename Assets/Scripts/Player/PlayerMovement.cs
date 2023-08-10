@@ -12,7 +12,10 @@ public class PlayerMovement : MonoBehaviour
     [Header("Customizable")]
     [SerializeField] float _2LegMoveSpeed;
     [SerializeField] float _1LegMoveSpeed;
-    public Vector3 _hopForce;
+    [SerializeField] float _noLegSpeed;
+    [SerializeField] float _hopForce;
+    private float _hopTimer;
+    [SerializeField] float _maxHopTime;
 
     [SerializeField] float _startMovePoint = 0.5f;
     [SerializeField] float _smoothMoveSpeed = 0.06f; //the higher the number the less responsive it gets
@@ -52,8 +55,10 @@ public class PlayerMovement : MonoBehaviour
                 moveSpeed *= _1LegMoveSpeed;
                 break;
             case Player.LimbState.NoLimb:
+                _hopTimer -= Time.deltaTime;
                 Hop(moveSpeed);
-                return;
+                moveSpeed *= _noLegSpeed;
+                break; 
             default: break;
         }
 
@@ -63,11 +68,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Hop(float moveSpeed)
     {
-        if (_playerJump.IsGrounded())
+        if (_playerJump.IsGrounded() && _hopTimer <= 0.0f)
         {
-            Debug.Log("Player hop");
-            _hopForce = new Vector3(_hopForce.x * moveSpeed, Mathf.Abs(moveSpeed) * _hopForce.y, 0f);
-            _rb.AddForce(_hopForce, ForceMode2D.Impulse);
+            Debug.Log("Hop");
+            _hopTimer = _maxHopTime;
+            _rb.AddForce(_rb.mass * Vector2.up * _hopForce * Mathf.Abs(moveSpeed), ForceMode2D.Impulse);
         }
     }
 

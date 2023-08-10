@@ -8,7 +8,7 @@ public class GroundCheck : MonoBehaviour
     private LayerMask groundLayer;
     public bool isGrounded;
 
-    private float checkDistance = 0.2f;
+    private float checkDistance = 0.3f;
 
     void Update()
     {

@@ -172,7 +172,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _2LegMoveSpeed: 10
   _1LegMoveSpeed: 8
-  _hopForce: {x: 5.74, y: 1, z: 0}
+  _noLegSpeed: 4
+  _hopForce: 5
+  _maxHopTime: 0.3
   _startMovePoint: 0.5
   _smoothMoveSpeed: 0.2
   facingRight: 0

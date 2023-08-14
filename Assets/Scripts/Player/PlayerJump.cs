@@ -54,7 +54,7 @@ public class PlayerJump : MonoBehaviour
         else
         {
             _coyoteFrames--;
-            if (!_isDoubleJumping)
+            if (!_isDoubleJumping && _coyoteFrames <= 0)
             {
                 _canDoubleJump = true;
             }

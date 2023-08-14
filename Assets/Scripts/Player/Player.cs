@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(PlayerJump))]
 public class Player : MonoBehaviour
 {
     public enum LimbState

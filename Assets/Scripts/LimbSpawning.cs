@@ -27,11 +27,16 @@ public class LimbSpawning : MonoBehaviour
     [SerializeField]
     private double _maxSpawnTimer;
 
+    [SerializeField]
+    private float _maxAngularVelocity;
+
     private int _currentLimbs;
     private float _limbTimer;
 
     private float _spawnPosX;
     private float _spawnPosY;
+
+    private float _angularVelocity;
 
     private static System.Random rnd = new System.Random();
 
@@ -72,8 +77,10 @@ public class LimbSpawning : MonoBehaviour
     {
         int index = rnd.Next(_limbOptions.Count);
         double val = rnd.NextDouble() * (_right - _left) + _left;
+        double val2 = rnd.NextDouble() * _maxAngularVelocity;
         _spawnPosX = (float)val;
         Limb limb = Instantiate(_limbOptions[index], new Vector3(_spawnPosX, _spawnPosY, 0), Quaternion.identity).GetComponent<Limb>();
+        limb.GetComponent<Rigidbody2D>().angularVelocity = (float)val2;
         _limbManager.AddLimb(limb);
         _currentLimbs++;
     }

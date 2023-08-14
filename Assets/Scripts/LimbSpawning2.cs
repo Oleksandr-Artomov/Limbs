@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LimbSpawning : MonoBehaviour
+public class LimbSpawning2 : MonoBehaviour
 {
     [SerializeField]
     private Transform _leftLimit;
@@ -30,8 +30,10 @@ public class LimbSpawning : MonoBehaviour
     private int _currentLimbs;
     private float _limbTimer;
 
-    private float _spawnPosX;
-    private float _spawnPosY;
+    [SerializeField]
+    private List<GameObject> _spawnPositions;
+    private Vector3 position;
+
 
     private static System.Random rnd = new System.Random();
 
@@ -40,12 +42,14 @@ public class LimbSpawning : MonoBehaviour
         _left = _leftLimit.position.x;
         _right = _rightLimit.position.x;
 
-        _spawnPosY = transform.position.y;
+
+
 
         for (int i = 0; i < _startLimbCount; i++)
         {
-            double val = rnd.NextDouble() * (_right - _left) + _left;
-            _spawnPosX = (float)val;
+            int index = rnd.Next(_spawnPositions.Count);
+            position = _spawnPositions[index].transform.position;
+
             SpawnLimb();
         }
 
@@ -71,9 +75,7 @@ public class LimbSpawning : MonoBehaviour
     private void SpawnLimb()
     {
         int index = rnd.Next(_limbOptions.Count);
-        double val = rnd.NextDouble() * (_right - _left) + _left;
-        _spawnPosX = (float)val;
-        Limb limb = Instantiate(_limbOptions[index], new Vector3(_spawnPosX, _spawnPosY, 0), Quaternion.identity).GetComponent<Limb>();
+        Limb limb = Instantiate(_limbOptions[index], new Vector3(position.x, position.y, position.z), Quaternion.identity).GetComponent<Limb>();
         _limbManager.AddLimb(limb);
         _currentLimbs++;
     }

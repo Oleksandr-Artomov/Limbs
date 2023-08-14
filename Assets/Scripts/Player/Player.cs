@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
     //Player components
     PlayerMovement _playerMovement;
     PlayerJump _playerJump;
-    [SerializeField] public float _playerHealth;
 
     float _swapLimbInput;
     public float _throwLimbInput;
@@ -46,7 +45,7 @@ public class Player : MonoBehaviour
 
     //Colliders
     public BoxCollider2D _limbCollider;
-    public CapsuleCollider2D _playerCollider;
+    public BoxCollider2D _playerCollider;
 
 
     public LimbState _limbState;

@@ -22,6 +22,7 @@ public class Limb : MonoBehaviour
     }
 
     public Player _attachedPlayer;
+    public Health _healthPlayer;
     public Transform _anchorPoint = null;
     Rigidbody2D _rb;
 
@@ -33,6 +34,7 @@ public class Limb : MonoBehaviour
     {
         _limbState = LimbState.PickUp;
         _rb = GetComponent<Rigidbody2D>();
+                            _rb.SetRotation(0);
 
         float angle = _limbData._throwAngle * Mathf.Deg2Rad;
 
@@ -48,7 +50,6 @@ public class Limb : MonoBehaviour
         _throwVelocity.x *= direction;
         _rb.velocity = _throwVelocity;
         _rb.angularVelocity = _limbData._angularVelocity;
-            //recoil when throwing
     }
 
     public void LimbAttack()
@@ -56,22 +57,18 @@ public class Limb : MonoBehaviour
 
     }
 
-    //Limb knockback and damage
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player" && _limbState == LimbState.Throwing)
         {
-            //Knockback
-
-            //Take Damage
-
-            //_attachedPlayer._playerHealth
-
+            _healthPlayer = collision.gameObject.GetComponent<Health>();
+            _healthPlayer._health -= 5.0f;
             Debug.Log("Limb hit");
+
         }
     }
 
-    //pickup
+    // Limb knockback and pickup
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player" && _limbState == LimbState.PickUp)
@@ -79,10 +76,18 @@ public class Limb : MonoBehaviour
             if (collision.gameObject.GetComponent<Player>().CanPickUpLimb(this))
             {
                 _attachedPlayer = collision.gameObject.GetComponent<Player>();
+                if (_limbType == LimbType.Arm)
+                {
+
+                    _rb.SetRotation(90);
+                }
+                if (_limbType == LimbType.Leg)
+                {
+                    _rb.SetRotation(0);
+                }
             }
         }
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player" && _limbState == LimbState.PickUp)
@@ -90,6 +95,15 @@ public class Limb : MonoBehaviour
             if (collision.gameObject.GetComponent<Player>().CanPickUpLimb(this))
             {
                 _attachedPlayer = collision.gameObject.GetComponent<Player>();
+                if (_limbType == LimbType.Arm)
+                {
+
+                    _rb.SetRotation(90);
+                }
+                if(_limbType == LimbType.Leg)
+                {
+                    _rb.SetRotation(0);
+                }
             }
         }
     }

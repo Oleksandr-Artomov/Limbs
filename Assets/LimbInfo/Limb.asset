@@ -16,3 +16,7 @@ MonoBehaviour:
   _angularVelocity: 0
   _throwAngle: 0.5
   _knockback: 0
+  _knockbackCounter: 0
+  _knockbackLength: 0
+  _damage: 10
+  _specialDamage: 0

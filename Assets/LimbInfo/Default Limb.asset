@@ -18,3 +18,5 @@ MonoBehaviour:
   _knockback: 1
   _knockbackCounter: 0
   _knockbackLength: 0
+  _damage: 10
+  _specialDamage: 0

@@ -30,11 +30,11 @@ public class Player : MonoBehaviour
     //Player components
     PlayerMovement _playerMovement;
     PlayerJump _playerJump;
+    PlayerHealth _health;
 
-    float _swapLimbInput;
     public float _throwLimbInput;
+    bool _canThrow;
 
-    bool _limbButtonDown;
 
     //the location of the limb in the list dictates what limb it is
     //left leg
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
 
     public LimbState _limbState;
     public MovementState _movementState;
-    SelectedLimb _selectedLimb = SelectedLimb.RightArm;
+    SelectedLimb _selectedLimb = SelectedLimb.LeftLeg;
 
     //facing left = -1, right = 1
     public int direction;
@@ -73,17 +73,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        /*swapping limbs*/
-        if (Mathf.Abs(_swapLimbInput) > 0.5f && _limbButtonDown == false)
-        {
-            SelectNextLimb();
-            _limbButtonDown = true;
-        }
-        else if (Mathf.Abs(_swapLimbInput) < 0.5f)
-        {
-            _limbButtonDown = false;
-        }
-
         //for testing
         if (_limbs[(int)_selectedLimb] != null)
         {
@@ -101,9 +90,14 @@ public class Player : MonoBehaviour
         }
 
         /*throwing limbs*/
-        if (_throwLimbInput > 0.5f && _limbs[(int)_selectedLimb] != null && _limbs[(int)_selectedLimb]._limbState == Limb.LimbState.Attached) 
+        if (_throwLimbInput > 0.5f && _limbs[(int)_selectedLimb] != null && _limbs[(int)_selectedLimb]._limbState == Limb.LimbState.Attached && _canThrow) 
         {
             _limbs[(int)_selectedLimb].ThrowLimb(direction);
+            if (_selectedLimb != SelectedLimb.LeftLeg)
+            {
+                _selectedLimb--;
+            }
+            _canThrow = false;
         }
 
 
@@ -118,10 +112,20 @@ public class Player : MonoBehaviour
 
         /*vertical movement*/
         _playerJump.Jump();
+
+        if (_throwLimbInput == 0.0f)
+        {
+            _canThrow = true;
+        }
     }
 
     public bool CanPickUpLimb(Limb limb)
     {
+        if (limb._limbState != Limb.LimbState.PickUp && limb._limbState != Limb.LimbState.Returning)
+        {
+            return false;
+        }
+
         //check if limb is alread picked up
         for (int i = 0; i < 4; i++)
         {
@@ -149,9 +153,16 @@ public class Player : MonoBehaviour
         if (i == 0 || i == 1)
         {
             _limbs[i]._limbType = Limb.LimbType.Leg;
+            if (i == 1)
+            {
+                _limbs[(int)_selectedLimb].GetComponent<SpriteRenderer>().color = Color.green;
+                _selectedLimb++;
+            }
         }
         else
         {
+            _limbs[(int)_selectedLimb].GetComponent<SpriteRenderer>().color = Color.green;
+            _selectedLimb++;
             _limbs[i]._limbType = Limb.LimbType.Arm;
         }
 
@@ -172,7 +183,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void SwapLimbInput(InputAction.CallbackContext ctx) => _swapLimbInput = ctx.ReadValue<float>();
     public void ThrowLimbInput(InputAction.CallbackContext ctx) => _throwLimbInput = ctx.ReadValue<float>();
 
     public void CheckLimbState()
@@ -188,44 +198,6 @@ public class Player : MonoBehaviour
             _limbState = LimbState.TwoLeg;
             return;
         }
-
         _limbState = LimbState.NoLimb;
-    }
-
-    public void SelectNextLimb()
-    {
-        //for testing
-        if (_limbs[(int)_selectedLimb] != null)
-        {
-            _limbs[(int)_selectedLimb].GetComponent<SpriteRenderer>().color = Color.green;
-        }
-
-        if (_swapLimbInput > 0.0f)
-        {
-            if (_selectedLimb == SelectedLimb.LeftLeg)
-            {
-                _selectedLimb = SelectedLimb.RightArm;
-            }
-            else
-            {
-                _selectedLimb--;
-            }
-        }
-        else
-        {
-            if (_selectedLimb == SelectedLimb.RightArm)
-            {
-                _selectedLimb = SelectedLimb.LeftLeg;
-            }
-            else
-            {
-                _selectedLimb++;
-            }
-        }
-
-        if (_limbs[(int)_selectedLimb] == null && _limbState != LimbState.NoLimb)
-        {
-            SelectNextLimb();
-        }
     }
 }

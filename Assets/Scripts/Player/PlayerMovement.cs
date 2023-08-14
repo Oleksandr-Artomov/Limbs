@@ -70,7 +70,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_playerJump.IsGrounded() && _hopTimer <= 0.0f)
         {
-            Debug.Log("Hop");
             _hopTimer = _maxHopTime;
             _rb.AddForce(_rb.mass * Vector2.up * _hopForce * Mathf.Abs(moveSpeed), ForceMode2D.Impulse);
         }

@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
     public float _throwLimbInput;
     bool _canThrow;
 
+    public float _strafeInput;
+
 
     //the location of the limb in the list dictates what limb it is
     //left leg
@@ -92,6 +94,10 @@ public class Player : MonoBehaviour
         /*throwing limbs*/
         if (_throwLimbInput > 0.5f && _limbs[(int)_selectedLimb] != null && _limbs[(int)_selectedLimb]._limbState == Limb.LimbState.Attached && _canThrow) 
         {
+            if (_strafeInput > 0.5f)
+            {
+                direction *= -1;
+            }
             _limbs[(int)_selectedLimb].ThrowLimb(direction);
             if (_selectedLimb != SelectedLimb.LeftLeg)
             {
@@ -184,6 +190,8 @@ public class Player : MonoBehaviour
     }
 
     public void ThrowLimbInput(InputAction.CallbackContext ctx) => _throwLimbInput = ctx.ReadValue<float>();
+
+    public void StrafeInput(InputAction.CallbackContext ctx) => _strafeInput = ctx.ReadValue<float>();
 
     public void CheckLimbState()
     {

@@ -15,15 +15,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "SwapLimb",
-                    "type": "Value",
-                    "id": "e7d79493-83c9-4759-99f3-19cd06ab6e44",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "9f201351-7893-424f-9aed-f26fdd7c4c9a",
@@ -36,6 +27,15 @@
                     "name": "ThrowLimb",
                     "type": "Button",
                     "id": "dd8ef21d-3cf5-4acf-a746-6763821e23e6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Strafe",
+                    "type": "Button",
+                    "id": "d3fc1bfd-3dfd-4a53-a022-8d70cb5eaeb2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -88,7 +88,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "1D Axis",
+                    "name": "D-Pad",
                     "id": "a1c0bd92-a22f-4ca1-855b-7b4606a56187",
                     "path": "1DAxis",
                     "interactions": "",
@@ -117,72 +117,6 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "HJ",
-                    "id": "c5a19b21-7a22-4df4-acd7-34420655ba39",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SwapLimb",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "900ccbcd-f95a-4adc-8129-0935ca1f6e5e",
-                    "path": "<Keyboard>/h",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "SwapLimb",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "a1bbbbb9-6b1f-4d7d-9444-148ae4e65de7",
-                    "path": "<Keyboard>/j",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "SwapLimb",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Shoulders",
-                    "id": "86cee3fb-f36c-48a0-975b-efe8803c5f80",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SwapLimb",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "bc9566e3-535f-4e6c-bbc4-21623ff525af",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "SwapLimb",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "ba72a1f3-d02e-44b4-ac00-2e1d469ce328",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "SwapLimb",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -227,6 +161,28 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "ThrowLimb",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f450602a-030b-4fb9-b359-2999f43edc3d",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Strafe",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "30c6e03f-9336-428e-bd96-bda18cd5bbcb",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Strafe",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

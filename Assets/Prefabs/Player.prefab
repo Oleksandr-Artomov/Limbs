@@ -172,22 +172,6 @@ MonoBehaviour:
     m_ActionName: Gameplay/Move[/XInputControllerWindows/leftStick/x,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8385072269478469061}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: SwapLimbInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: e7d79493-83c9-4759-99f3-19cd06ab6e44
-    m_ActionName: Gameplay/SwapLimb[/Keyboard/shift,/XInputControllerWindows/leftShoulder]
-  - m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 8385072269478469063}
         m_TargetAssemblyTypeName: PlayerJump, Assembly-CSharp
         m_MethodName: JumpInput
@@ -218,6 +202,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: dd8ef21d-3cf5-4acf-a746-6763821e23e6
     m_ActionName: Gameplay/ThrowLimb[/XInputControllerWindows/rightTrigger,/Keyboard/t]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8385072269478469061}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: StrafeInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d3fc1bfd-3dfd-4a53-a022-8d70cb5eaeb2
+    m_ActionName: Gameplay/Strafe[/Keyboard/leftShift,/DualSenseGamepadHID/leftShoulder]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Controller
   m_DefaultActionMap: Gameplay
@@ -283,6 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _throwLimbInput: 0
+  _strafeInput: 0
   _limbs: []
   _limbAnchors:
   - {fileID: 8385072269345563141}
@@ -348,6 +349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+  _health: 0
 --- !u!1 &6626109593687853981
 GameObject:
   m_ObjectHideFlags: 0

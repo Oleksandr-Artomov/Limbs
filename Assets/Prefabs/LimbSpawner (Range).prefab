@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 9113931338938001847}
   - component: {fileID: 6819372074900375388}
   m_Layer: 0
-  m_Name: LimbSpawner
+  m_Name: LimbSpawner (Range)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

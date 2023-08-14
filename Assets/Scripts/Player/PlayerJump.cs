@@ -18,15 +18,15 @@ public class PlayerJump : MonoBehaviour
     [SerializeField]
     private float _earlyExitGravityFactor;
     [SerializeField]
-    private float _maxJumpBufferFrames;
+    private float _maxJumpBufferTime;
     [SerializeField]
-    private float _maxCoyoteFrames;
+    private float _maxCoyoteTime;
 
     private float _gravityScaleFactor;
     private float _jumpGravity;
     private float _initJumpSpeed;
-    private float _jumpBufferFrames;
-    private float _coyoteFrames;
+    private float _jumpBufferTime;
+    private float _coyoteTime;
     
     bool _canJump;
     public bool _canDoubleJump;
@@ -47,14 +47,17 @@ public class PlayerJump : MonoBehaviour
     {
         if (IsGrounded() && _player._movementState == Player.MovementState.Move)
         {
-            _coyoteFrames = _maxCoyoteFrames;
-            _canDoubleJump = false;
-            _isDoubleJumping = false;
+            _coyoteTime = _maxCoyoteTime;
+            if (_player._movementState == Player.MovementState.Move)
+            {
+                _canDoubleJump = false;
+                _isDoubleJumping = false;
+            }
         }
         else
         {
-            _coyoteFrames--;
-            if (!_isDoubleJumping && _coyoteFrames <= 0)
+            _coyoteTime -= Time.deltaTime;
+            if (!_isDoubleJumping && _coyoteTime <= 0)
             {
                 _canDoubleJump = true;
             }
@@ -62,17 +65,17 @@ public class PlayerJump : MonoBehaviour
 
         if (_jumpInput > 0.5f && _canJump)
         {
-            _jumpBufferFrames = _maxJumpBufferFrames;
+            _jumpBufferTime = _maxJumpBufferTime;
         }
         else
         {
-            _jumpBufferFrames--;
+            _jumpBufferTime -= Time.deltaTime;
         }
 
-        if (_jumpBufferFrames > 0f && _coyoteFrames > 0f || _canDoubleJump && _jumpInput > 0.5f && _canJump) 
+        if (_jumpBufferTime > 0f && _coyoteTime > 0f || _canDoubleJump && _jumpInput > 0.5f && _canJump) 
         {
-            _jumpBufferFrames = 0f;
-            _coyoteFrames = 0f;
+            _jumpBufferTime = 0f;
+            _coyoteTime = 0f;
             StartJump();
         }
         else if (_player._movementState == Player.MovementState.Jump)

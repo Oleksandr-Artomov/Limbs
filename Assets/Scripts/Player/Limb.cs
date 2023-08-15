@@ -62,7 +62,7 @@ public class Limb : MonoBehaviour
         if (collision.gameObject.tag == "Player" && _limbState == LimbState.Throwing)
         {
             _healthPlayer = collision.gameObject.GetComponent<Health>();
-            _healthPlayer._health -= 5.0f;
+            _healthPlayer.TakeDamage();
             Debug.Log("Limb hit");
 
         }

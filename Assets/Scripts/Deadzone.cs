@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class Deadzone : MonoBehaviour
 {
-    [SerializeField] private GameObject respawnPoint;
+    [SerializeField] private Transform respawnPoint;
 
     private void OnTriggerEnter2D(Collider2D collide)
     {
-        if(collide.CompareTag(("Deadzone")))
+        if (collide.CompareTag(("Player")))
         {
-            transform.position = respawnPoint.transform.position;
+            collide.GetComponent<PlayerHealth>().KillPlayer();
         }
     }
 }
